@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Practica 2 - Objeto Navigator</title>
+
+    <style>
+      .parrafos {
+        font-size: 1em;
+      }
+
+      .texto1 {
+        border: #2a1ca8 solid 1px;
+      }
+
+      #boton {
+        background-color: #230baa;
+        color: #ffffff;
+        font-size: 2em;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Ejemplo de navigator</h1>
+
+    <button id="boton" onclick="obtieneDatos()">
+      Obtiene datos del navegador
+    </button>
+
+    <p class="datos"></p>
+    <p class="parrafos texto1">Este es un párrafo</p>
+
+    <ul id="navegador">
+      <li id="li1"></li>
+      <li id="li2"></li>
+      <li id="li3"></li>
+      <li id="li4"></li>
+    </ul>
+
+    <div>
+      <a href="../index.html">Volver al inicio</a>
+    </div>
+
+    <script>
+      var navegador = document.getElementById("navegador");
+      var datos = document.getElementsByTagName("li");
+
+      function obtieneDatos() {
+        console.log("Nombre del navegador: " + navigator.appCodeName);
+        console.log("Versión del navegador: " + navigator.appVersion);
+        console.log("Estatus del navegador: " + navigator.onLine);
+        console.log("SO: " + navigator.platform);
+
+        var li1 = document.getElementById("li1");
+        var li2 = document.getElementById("li2");
+        var li3 = document.getElementById("li3");
+        var li4 = document.getElementById("li4");
+
+        li1.innerHTML = "Nombre del navegador: " + navigator.appCodeName
+        li2.innerHTML = "Version del navegador: " + navigator.appVersion
+        li3.innerHTML = "Estatus del navegador: " + navigator.onLine
+        li4.innerHTML = "Sistema Operativo: " + navigator.platform
+      }
+    </script>
+  </body>
+</html>
