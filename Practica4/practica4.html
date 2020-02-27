@@ -4,16 +4,75 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Practica 4 - Imagen de ubicación del dispositivo</title>
+
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-image: url("https://upload.wikimedia.org/wikipedia/commons/c/cc/Rector%C3%ADa.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 0;
+      }
+
+      h1 {
+        color: #ffffff;
+        background-color: #00266d;
+        margin: 0px;
+      }
+
+      p {
+        font-style: italic;
+      }
+
+      .topnav {
+        overflow: hidden;
+        background-color: rgb(112, 0, 0);
+      }
+
+      .topnav a {
+        float: left;
+        color: #ffffff;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+      }
+
+      .topnav a:hover {
+        background-color: #333;
+      }
+
+      button {
+        background-color: #00266d;
+        color: #ffffff;
+        align-content: center;
+        padding: 25px;
+      }
+    </style>
   </head>
   <body>
-    <button onclick="obtieneUbicacion()">Obtener ubicacion</button>
-    <div
-      id="mapa"
-      style="padding-left: 50px; border: #cccccc 10px; background-color: aqua;"
-    ></div>
     <div>
-      <a href="../index.html">Volver al inicio</a>
+      <h1 style="text-align: center;">
+        Jonathan Eduardo Muñoz Rodríguez - ISSC 611
+      </h1>
     </div>
+
+    <div class="topnav">
+      <a href="../Practica1/GmapsBootstrap.html">Primera práctica</a>
+      <a href="../Practica2/practica2.html">Segunda práctica</a>
+      <a href="../Practica3/practica3.html">Tercera práctica</a>
+      <a href="../Practica4/practica4.html">Cuarta práctica</a>
+      <a href="../Practica5/practica5.html">Quinta práctica</a>
+    </div>
+
+    <div style="background-color: #fff; text-align: center;">
+      <button onclick="obtieneUbicacion()">Obtener ubicacion</button>
+      <div id="mapa" ></div>
+      <div>
+        <a href="../index.html">Volver al inicio</a>
+      </div>
+    </div>
+
     <script>
       function obtieneUbicacion() {
         if (navigator.geolocation) {

@@ -6,8 +6,41 @@
     <title>Practica 2 - Objeto Navigator</title>
 
     <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-image: url("https://upload.wikimedia.org/wikipedia/commons/c/cc/Rector%C3%ADa.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 0;
+      }
+
+      h1 {
+        color: #ffffff;
+        background-color: #00266d;
+        margin: 0px;
+      }
+
+      .topnav {
+        overflow: hidden;
+        background-color: rgb(112, 0, 0);
+      }
+
+      .topnav a {
+        float: left;
+        color: #ffffff;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+      }
+
+      .topnav a:hover {
+        background-color: #333;
+      }
+
       .parrafos {
         font-size: 1em;
+        margin: 0px;
       }
 
       .texto1 {
@@ -15,33 +48,48 @@
       }
 
       #boton {
-        background-color: #230baa;
+        background-color: #00266d;
         color: #ffffff;
-        font-size: 2em;
+        align-content: center;
+        padding: 25px;
       }
     </style>
   </head>
   <body>
-    <h1>Ejemplo de navigator</h1>
-
-    <button id="boton" onclick="obtieneDatos()">
-      Obtiene datos del navegador
-    </button>
-
-    <p class="datos"></p>
-    <p class="parrafos texto1">Este es un párrafo</p>
-
-    <ul id="navegador">
-      <li id="li1"></li>
-      <li id="li2"></li>
-      <li id="li3"></li>
-      <li id="li4"></li>
-    </ul>
-
     <div>
-      <a href="../index.html">Volver al inicio</a>
+      <h1 style="text-align: center;">
+        Jonathan Eduardo Muñoz Rodríguez - ISSC 611
+      </h1>
     </div>
 
+    <div class="topnav">
+      <a href="../Practica1/GmapsBootstrap.html">Primera práctica</a>
+      <a href="../Practica2/practica2.html">Segunda práctica</a>
+      <a href="../Practica3/practica3.html">Tercera práctica</a>
+      <a href="../Practica4/practica4.html">Cuarta práctica</a>
+      <a href="../Practica5/practica5.html">Quinta práctica</a>
+    </div>
+
+    <div style="background-color: #ffffff;">
+      <p class="parrafos texto1">Este es un párrafo</p>
+
+      <ul id="navegador">
+        <li id="li1"></li>
+        <li id="li2"></li>
+        <li id="li3"></li>
+        <li id="li4"></li>
+      </ul>
+
+      <div style="text-align: center;">
+        <button id="boton" onclick="obtieneDatos()">
+          Obtiene datos del navegador
+        </button>
+      </div>
+      
+      <div>
+        <a href="../index.html">Volver al inicio</a>
+      </div>
+    </div>
     <script>
       var navegador = document.getElementById("navegador");
       var datos = document.getElementsByTagName("li");
@@ -57,11 +105,26 @@
         var li3 = document.getElementById("li3");
         var li4 = document.getElementById("li4");
 
-        li1.innerHTML = "Nombre del navegador: " + navigator.appCodeName
-        li2.innerHTML = "Version del navegador: " + navigator.appVersion
-        li3.innerHTML = "Estatus del navegador: " + navigator.onLine
-        li4.innerHTML = "Sistema Operativo: " + navigator.platform
+        li1.innerHTML = "Nombre del navegador: " + navigator.appCodeName;
+        li2.innerHTML = "Version del navegador: " + navigator.appVersion;
+        li3.innerHTML = "Estatus del navegador: " + navigator.onLine;
+        li4.innerHTML = "Sistema Operativo: " + navigator.platform;
       }
     </script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
