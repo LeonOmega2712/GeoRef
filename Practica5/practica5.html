@@ -1,112 +1,113 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Practica 5 - Info window</title>
 
-    <style>
-      #map {
-        height: 600px;
-        width: 100%;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Practica 5 - Info window</title>
 
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background-image: url("https://upload.wikimedia.org/wikipedia/commons/c/cc/Rector%C3%ADa.jpg");
-        background-size: cover;
-        background-repeat: no-repeat;
-        margin: 0;
-      }
+  <style>
+    #map {
+      height: 600px;
+      width: 100%;
+    }
 
-      h1 {
-        color: #ffffff;
-        background-color: #00266d;
-        margin: 0px;
-      }
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-image: url("https://upload.wikimedia.org/wikipedia/commons/c/cc/Rector%C3%ADa.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      margin: 0;
+    }
 
-      p {
-        font-style: italic;
-      }
+    h1 {
+      color: #ffffff;
+      background-color: #00266d;
+      margin: 0px;
+    }
 
-      .topnav {
-        overflow: hidden;
-        background-color: rgb(112, 0, 0);
-      }
+    p {
+      font-style: italic;
+    }
 
-      .topnav a {
-        float: left;
-        color: #ffffff;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-        font-size: 17px;
-      }
+    .topnav {
+      overflow: hidden;
+      background-color: rgb(112, 0, 0);
+    }
 
-      .topnav a:hover {
-        background-color: #333;
-      }
+    .topnav a {
+      float: left;
+      color: #ffffff;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+    }
 
-      button {
-        background-color: #00266d;
-        color: #ffffff;
-        align-content: center;
-        padding: 25px;
-      }
-    </style>
-  </head>
-  <body>
-    <div style="background-color: #fff; text-align: center;">
-      <div>
-        <h1 style="text-align: center;">
-          Jonathan Eduardo Muñoz Rodríguez - ISSC 611
-        </h1>
-      </div>
+    .topnav a:hover {
+      background-color: #333;
+    }
 
-      <div class="topnav">
-        <a href="../Practica1/GmapsBootstrap.html">Primera práctica</a>
-        <a href="../Practica2/practica2.html">Segunda práctica</a>
-        <a href="../Practica3/practica3.html">Tercera práctica</a>
-        <a href="../Practica4/practica4.html">Cuarta práctica</a>
-        <a href="../Practica5/practica5.html">Quinta práctica</a>
-      </div>
+    button {
+      background-color: #00266d;
+      color: #ffffff;
+      align-content: center;
+      padding: 25px;
+    }
+  </style>
+</head>
 
-      <div id="map"></div>
-
-      <div>
-        <a href="../index.html">Volver al inicio</a>
-      </div>
+<body>
+  <div style="background-color: #fff; text-align: center;">
+    <div>
+      <h1 style="text-align: center;">
+        Jonathan Eduardo Muñoz Rodríguez - ISSC 611
+      </h1>
     </div>
-    <script>
-      function iniciarMapa() {
-        var map = new google.maps.Map(document.getElementById("map"), {
-          center: { lat: 21.152639, lng: -101.711598 },
-          zoom: 14
+
+    <div class="topnav">
+      <a href="../Practica1/GmapsBootstrap.html">Primera práctica</a>
+      <a href="../Practica2/practica2.html">Segunda práctica</a>
+      <a href="../Practica3/practica3.html">Tercera práctica</a>
+      <a href="../Practica4/practica4.html">Cuarta práctica</a>
+      <a href="../Practica5/practica5.html">Quinta práctica</a>
+      <a href="../Firebase/practica1.html">Sexta práctica</a>
+    </div>
+
+    <div id="map"></div>
+
+    <div>
+      <a href="../index.html">Volver al inicio</a>
+    </div>
+  </div>
+  <script>
+    function iniciarMapa() {
+      var map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 21.152639, lng: -101.711598 },
+        zoom: 14
+      });
+
+      informacion = new google.maps.InfoWindow();
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+
+          informacion.setPosition(pos);
+          informacion.setContent(
+            "Usted esta aquí <br><img width='100px' height='100px' src='https://image.flaticon.com/icons/png/512/855/855082.png'></img></br>"
+          );
+          informacion.open(map);
+          map.setCenter(pos);
         });
-
-        informacion = new google.maps.InfoWindow();
-
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
-
-            informacion.setPosition(pos);
-            informacion.setContent(
-              "Usted esta aquí <br><img width='100px' height='100px' src='https://image.flaticon.com/icons/png/512/855/855082.png'></img></br>"
-            );
-            informacion.open(map);
-            map.setCenter(pos);
-          });
-        }
       }
-    </script>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADjOfdGIg-7JiqjoTstMN9el4g-nLhxxA&callback=iniciarMapa"
-      async
-      defer
-    ></script>
-  </body>
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADjOfdGIg-7JiqjoTstMN9el4g-nLhxxA&callback=iniciarMapa"
+    async defer></script>
+</body>
+
 </html>

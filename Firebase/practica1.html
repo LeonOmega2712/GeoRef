@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+
+  <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.9.3/firebase-analytics.js"></script>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-image: url("https://upload.wikimedia.org/wikipedia/commons/c/cc/Rector%C3%ADa.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        margin: 0;
+      }
+
+      h1 {
+        color: #ffffff;
+        background-color: #00266d;
+        margin: 0px;
+      }
+
+      .topnav {
+        overflow: hidden;
+        background-color: rgb(112, 0, 0);
+      }
+
+      .topnav a {
+        float: left;
+        color: #ffffff;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+      }
+
+      .topnav a:hover {
+        background-color: #333;
+      }
+    </style>
+</head>
+
+<body>
+
+  <div>
+    <h1 style="text-align: center;">
+      Jonathan Eduardo Muñoz Rodríguez - ISSC 611
+    </h1>
+  </div>
+
+  <div class="topnav">
+    <a href="../Practica1/GmapsBootstrap.html">Primera práctica</a>
+    <a href="../Practica2/practica2.html">Segunda práctica</a>
+    <a href="../Practica3/practica3.htmll">Tercera práctica</a>
+    <a href="../Practica4/practica4.html">Cuarta práctica</a>
+    <a href="../Practica5/practica5.html">Quinta práctica</a>
+    <a href="practica1.html">Sexta práctica</a>
+  </div>
+
+  <div class="jumbotron text-center">
+    <h2>Lista de productos</h2>
+  </div>
+
+  <div class="container">
+    <form id="forma">
+
+      <div class="text-center">
+        <input type="text" placeholder="Código" name="codigo" class="col-md-2" />
+        <input type="text" placeholder="Nombre" name="nombre" class="col-md-8" />
+        <button type="submit" class="btn btn-success btn-sm">Agregar</button>
+      </div>
+    </form>
+
+
+    <ul id="lista" style="margin-top:1em;" class="list-group"></ul>
+
+    <div style="background-color: #fff;" >
+      <a href="../index.html">Volver al inicio</a>
+
+    </div>
+  </div>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyDaB3jmYQYhd4LP5p6Y315EWPntJ_jgU9A",
+      authDomain: "sistemasgeo2712.firebaseapp.com",
+      databaseURL: "https://sistemasgeo2712.firebaseio.com",
+      projectId: "sistemasgeo2712",
+      storageBucket: "sistemasgeo2712.appspot.com",
+      messagingSenderId: "877902782462",
+      appId: "1:877902782462:web:68df9256f5f44028cb2aaf",
+      measurementId: "G-J6ZGJVTH1Y"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+    const db = firebase.firestore();
+
+    const formulario = document.querySelector("#forma");
+    const productosLista = document.querySelector("#lista");
+
+    function renderProducto(doc) {
+      console.log(doc.data());
+
+      let li = document.createElement("li");
+      let codigo = document.createElement("span");
+      let nombre = document.createElement("span");
+      let borrar = document.createElement("button");
+
+      nombre.textContent = doc.data().nombre;
+      codigo.textContent = doc.data().codigo;
+      borrar.textContent = "Borrar";
+
+      li.setAttribute("id", doc.id);
+      li.appendChild(codigo);
+      li.appendChild(nombre);
+      li.appendChild(borrar);
+      li.className = "list-group-item";
+      borrar.className = "btn btn-danger float-right btn-sm";
+      codigo.className = "col-md-3";
+      nombre.className = "col-md-6";
+      productosLista.appendChild(li);
+
+      borrar.addEventListener("click", e => {
+        let id = e.target.parentElement.getAttribute("id");
+        db.collection("productos")
+          .doc(id)
+          .delete();
+      });
+    }
+
+    formulario.addEventListener("submit", e => {
+      e.preventDefault();
+      db.collection("productos").add({
+        nombre: formulario.nombre.value,
+        codigo: formulario.codigo.value
+      });
+    });
+
+    db.collection("productos").onSnapshot(snapshot => {
+      let changes = snapshot.docChanges();
+      changes.forEach(change => {
+        if (change.type == "added") {
+          renderProducto(change.doc);
+        } else if (change.type == "removed") {
+          console.log(change.doc.id);
+          let valorid = document.getElementById(change.doc.id);
+          lista.removeChild(valorid);
+        }
+      });
+
+      formulario.nombre.value = "";
+      formulario.codigo.value = "";
+    });
+  </script>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
