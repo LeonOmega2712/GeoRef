@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sigueme</title>
+
+    <style>
+        #map {
+            height: 100%;
+        }
+
+        html {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background-image: url("https://upload.wikimedia.org/wikipedia/commons/c/cc/Rector%C3%ADa.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+            margin: 0;
+            height: 100%;
+
+            padding: 0;
+        }
+
+        h1 {
+            color: #ffffff;
+            background-color: #00266d;
+            margin: 0px;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: rgb(112, 0, 0);
+        }
+
+        .topnav a {
+            float: left;
+            color: #ffffff;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a:hover {
+            background-color: #333;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div style="background-color: #fff; text-align: center;">
+        <div>
+            <h1 style="text-align: center;">
+                Jonathan Eduardo Muñoz Rodríguez - ISSC 611
+            </h1>
+        </div>
+
+        <div class="topnav">
+            <a href="practica1.html">Primera práctica</a>
+            <a href="practica2.html">Segunda práctica</a>
+            <a href="practica3.html">Tercera práctica</a>
+            <a href="practica4.html">Cuarta práctica</a>
+            <a href="practica5.html">Quinta práctica</a>
+            <a href="practica6.html">Sexta práctica</a>
+            <a href="practica1_Firebase.html">Primera práctica (Firebase)</a>
+        </div>
+
+
+        <div id="map"></div>
+
+
+        <script>
+            var coordenadas = {
+                lat: 0,
+                lng: 0
+            }
+
+            var propiedades = {
+                center: coordenadas,
+                zoom: 20
+            }
+
+
+            function iniciarMapa() {
+                map = new google.maps.Map(document.getElementById("map"), propiedades);
+
+                var icono = {
+                    url: "https://lh3.googleusercontent.com/proxy/KVMJYiCZ_6dXIS6x4HvkxmGS9psO4awQecAPWZvq6xi0-1oVCtTx2qGJ_ZIbiH73B6oB3Zg",
+                    scaledSize: new google.maps.Size(50, 50),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(0, 0)
+                };
+
+                var marker = new google.maps.Marker({
+                    position: { lat: 0, lng: 0 },
+                    icon: icono,
+                    scaledSize: new google.maps.Size(50, 50),
+                    map: map
+                });
+
+                if (navigator.geolocation) {
+                    setInterval(function () {
+                        moverPosicion(marker);
+                    }, 3000);
+                }
+            }
+
+            function moverPosicion(marker) {
+                navigator.geolocation.getCurrentPosition(posicion => {
+                    var pos = {
+                        lat: posicion.coords.latitude,
+                        lng: posicion.coords.longitude
+                    }
+                    marker.setPosition(new google.maps.LatLng(posicion.coords.latitude, posicion.coords.longitude));
+                    map.panTo(new google.maps.LatLng(posicion.coords.latitude, posicion.coords.longitude));
+                    map.setCenter(pos);
+                });
+            }
+
+        </script>
+
+        <script
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADjOfdGIg-7JiqjoTstMN9el4g-nLhxxA&callback=iniciarMapa"
+            async defer></script>
+</body>
+
+</html>
