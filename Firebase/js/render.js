@@ -1,0 +1,43 @@
+function renderProducto(doc) {
+
+    var registro = new Registro(doc.id, doc.data().noombre, doc.data().codigo);
+
+    let li = document.createElement("li");
+    li.setAttribute("id", doc.id);
+
+    let nombre = document.createElement("input");
+    nombre.type = "text";
+    nombre.value = registro.nombre;
+    nombre.className = "nombre form-control";
+
+    let codigo = document.createElement("input");
+    codigo.type = "text";
+    codigo.value = registro.codigo;
+    codigo.className = "codigo form-control"
+
+    let borrar = document.createElement("button");
+    borrar.textContent = "Borrar";
+    borrar.className = "btn btn-danger m-3";
+
+    let editar = document.createElement("button");
+    editar.textContent = "Editar";
+    editar.className = "btn btn-success m-3";
+    editar.setAttribute("data-toggle", "modal");
+    editar.setAttribute("data-target", "#ventanaeditar");
+
+    li.appendChild(borrar);
+    li.appendChild(editar);
+    li.appendChild(nombre);
+    li.appendChild(codigo);
+    productosLista.appendChild(li);
+
+    borrar.addEventListener("click", e => {
+        let id = e.target.parentElement.getAttribute("id");
+        registro.borrar(id);
+    });
+
+    editar.addEventListener("click", e => {
+        let id = e.target.parentElement.getAttribute("id");
+        registro.editar(id);
+    });
+}
