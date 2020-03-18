@@ -1,6 +1,6 @@
 function renderProducto(doc) {
 
-    var registro = new Registro(doc.id, doc.data().noombre, doc.data().codigo);
+    var registro = new Registro(doc.id, doc.data().nombre, doc.data().codigo);
 
     let li = document.createElement("li");
     li.setAttribute("id", doc.id);
