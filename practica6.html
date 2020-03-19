@@ -14,15 +14,60 @@
         height: 100%;
         margin: 0;
         padding: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
+
+      h1 {
+      color: #ffffff;
+      background-color: #00266d;
+      margin: 0px;
+    }
+
+    p {
+      font-style: italic;
+    }
+
+    .topnav {
+      overflow: hidden;
+      background-color: rgb(112, 0, 0);
+    }
+
+    .topnav a {
+      float: left;
+      color: #ffffff;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+    }
+
+    .topnav a:hover {
+      background-color: #333;
+    }
+
     </style>
   </head>
   <body>
+
+    <div>
+        <h1 style="text-align: center;">
+          Jonathan Eduardo Muñoz Rodríguez - ISSC 611
+        </h1>
+      </div>
+  
+      <div class="topnav">
+        <a href="practica1.html">Primera práctica</a>
+        <a href="practica2.html">Segunda práctica</a>
+        <a href="practica3.html">Tercera práctica</a>
+        <a href="practica4.html">Cuarta práctica</a>
+        <a href="practica5.html">Quinta práctica</a>
+        <a href="practica6.html">Sexta práctica</a>
+        <a href="Firebase/practica1_Firebase.html">Primera práctica (Firebase)</a>
+      </div>
+
     <div id="map"></div>
     <script>
- 
       var map;
-
       var coordenadas = {
         lat: 0, 
         lng: 0
@@ -34,7 +79,6 @@
       }
 
       function iniciaMapa() {
-
         map = new google.maps.Map(document.getElementById('map'), propiedades);
         var icono = {
                 url: "img/ubicacion.gif", 
@@ -45,7 +89,6 @@
         var marker = new google.maps.Marker({
             position: { lat: 0, lng: 0 },
             icon: icono,
-
             map: map
         });
 
@@ -53,10 +96,8 @@
 
             setInterval(function(){
                 moverPosicion(marker);
-            },5000);
-            
+            },5000);   
         }
- 
       }
 
       function moverPosicion(marker) {
@@ -68,14 +109,8 @@
             marker.setPosition( new google.maps.LatLng( posicion.coords.latitude, posicion.coords.longitude ) );
             map.panTo( new google.maps.LatLng( posicion.coords.latitude, posicion.coords.longitude ) );
             map.setCenter(pos);
-
         });
-
       }
-
-
-
- 
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADjOfdGIg-7JiqjoTstMN9el4g-nLhxxA&callback=iniciaMapa">
