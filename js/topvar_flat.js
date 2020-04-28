@@ -1,7 +1,7 @@
 <div>
     <h1>
         Jonathan Eduardo Muñoz Rodríguez - ISSC 611
-        </h1>
+    </h1>
 </div>
 
 <ul>
