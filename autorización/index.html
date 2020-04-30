@@ -32,6 +32,11 @@
       img {
         width: 100%;
       }
+
+      .logged-out, logged-in {
+        display: none;
+      }
+
     </style>
   </head>
   <body class="bg-ligth">
@@ -51,22 +56,24 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Mi cuenta</a>
+          <li class="nav-item logged-in">
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#micuentamodal"
+              >Mi cuenta</a
+            >
           </li>
-          <li class="nav-item">
+          <li class="nav-item logged-in">
             <a class="nav-link" href="#" id="salir">Salir</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item logged-out">
             <a
-              class="nav-link"
+              class="nav-link "
               href="#"
               data-toggle="modal"
               data-target="#ingresarmodal"
               >Ingresar</a
             >
           </li>
-          <li class="nav-item">
+          <li class="nav-item logged-out">
             <a
               class="nav-link"
               href="#"
@@ -113,6 +120,8 @@
                     required
                   />
                 </div>
+              </div>
+              <div class="row">
                 <div class="col-12 m-2">
                   <input
                     class="form-control"
@@ -122,12 +131,21 @@
                     required
                   />
                 </div>
+              </div>
+              <div class="row">
                 <div class="col-12 text-center">
                   <button class="btn btn-primary">Ingresar</button>
                   <p class="error text-danger"></p>
                 </div>
               </div>
             </form>
+
+            <div class="row">
+              <div class="col-12 text-center">
+                <span onclick="entrarGoogle()" class="btn btn-danger">Ingresar con Google</span>
+              </div>
+            </div>
+
           </div>
           <div class="modal-footer">
             <button
@@ -170,12 +188,25 @@
                 <div class="col-12 m-2">
                   <input
                     class="form-control"
+                    type="text"
+                    id="rnombre"
+                    placeholder="Escribe aqui tu nombre"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 m-2">
+                  <input
+                    class="form-control"
                     type="email"
                     id="rcorreo"
                     placeholder="Escribe aqui tu correo"
                     required
                   />
                 </div>
+              </div>
+              <div class="row">
                 <div class="col-12 m-2">
                   <input
                     class="form-control"
@@ -185,8 +216,37 @@
                     required
                   />
                 </div>
+              </div>
+              <div class="row">
+                <div class="col-12 m-2">
+                  <input
+                    class="form-control"
+                    type="number"
+                    step="any"
+                    id="rtelefono"
+                    placeholder="Escribe aqui tu teléfono"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 m-2">
+                  <input
+                    class="form-control"
+                    type="text"
+                    id="rdireccion"
+                    placeholder="Escribe aqui tu dirección"
+                    required
+                  />
+                </div>
+              </div>
+              <div class class="row">
                 <div class="col-12 text-center">
-                  <button class="btn btn-primary">Registrar</button>
+                  <input
+                    type="submit"
+                    class="btn btn-primary"
+                    value="Registrarse"
+                  />
                   <p class="error text-danger"></p>
                 </div>
               </div>
@@ -227,9 +287,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-            Info de la cuenta
-          </div>
+          <div class="modal-body datosdelacuenta"></div>
           <div class="modal-footer">
             <button
               type="button"
@@ -245,7 +303,7 @@
 
     <div class="container">
       <div class="row text-center" id="listadeplatillos">
-        <div class="col-12 col-md-4">
+        <!-- <div class="col-12 col-md-4">
           <img src="img/pizzadepepperoni.jpg" alt="pizza" />
           <p>Pizza de pepperoni</p>
           <p>$89</p>
@@ -259,7 +317,7 @@
           <img src="img/pizzadecarnes.jpg" alt="pizza" />
           <p>Pizza de carnes frías</p>
           <p>$169</p>
-        </div>
+        </div> -->
       </div>
     </div>
 
@@ -285,7 +343,6 @@
 
       const auth = firebase.auth();
       const db = firebase.firestore();
-
     </script>
     <script src="scripts/autoriazacion.js"></script>
     <script src="scripts/index.js"></script>

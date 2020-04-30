@@ -1,3 +1,16 @@
+auth.onAuthStateChanged( user => {
+    if (user) {
+        db.collection('platillos').onSnapshot( snapshot => {
+            obtienePlatillos(snapshot.docs);
+        }) ;
+        configurarMenu(user);
+
+    } else {
+        obtienePlatillos([]);
+        configurarMenu();
+    }
+});
+
 const formaingresar = document.getElementById('formaingresar');
 
 formaingresar.addEventListener('submit', (e) => {
@@ -49,3 +62,58 @@ salir.addEventListener('click', (e) => {
         alert('El usuario ha salido del sistema');
     });
 })
+
+const formaregistrarte = document.getElementById('formaregistrar');
+
+formaregistrarte.addEventListener('submit', (e)=> {
+    e.preventDefault();
+
+    const correo = formaregistrarte['rcorreo'].value;
+    const contrasena = formaregistrarte['rcontrasena'].value;
+
+    auth.createUserWithEmailAndPassword(correo, contrasena).then( cred => {
+        return db.collection('usuarios').doc(cred.user.uid).set({
+            nombre: formaregistrarte['rnombre'].value,
+            telefono: formaregistrarte['rtelefono'].value,
+            direccion: formaregistrarte['rdireccion'].value
+        });
+
+
+    }).then( () => {
+        $('#registrarmodal').modal('hide');
+        formaregistrarte.reset();
+        formaregistrarte.querySelector('.error').innerHTML = '';
+    }).catch ( err => {
+        formaregistrarte.querySelector('.error').innerHTML = mensajeError(err.code);
+    });
+});
+
+entrarGoogle = () => {
+ 
+    var provider = new firebase.auth.GoogleAuthProvider();
+
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+
+        var token = result.credential.accessToken;
+        console.log(token);
+
+        var user = result.user;
+
+            console.log(user);
+            const html = `
+                <p>Nombre: ${ user.displayName }</p>
+                <p>Correo: ${ user.email}</p>
+                <img src="${ user.photoURL }" width="50px">
+            `;
+            datosdelacuenta.innerHTML = html;
+
+            $('#ingresarmodal').modal('hide');
+            formaingresar.reset();
+            formaingresar.querySelector('.error').innerHTML = '';
+
+
+        // ...
+        }).catch(function(error) {
+            console.log(error);
+    });
+}
