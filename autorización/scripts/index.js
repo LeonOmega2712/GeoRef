@@ -42,7 +42,7 @@ const obtienePlatillos = (data) =>{
                     <img src="img/${platillo.imagen}" alt="${platillo.nombre}">
                     <p>${platillo.nombre}</p>
                     <p class="text-danger">$${platillo.precio}.00 pesos</p>
-                    <a href="https://www.paypal.me/grupohernandezalba/${platillo.precio}" target="_blank">
+                    <a href="https://paypal.me/LeonOmega/${platillo.precio}" target="_blank">
                         <button class="btn btn-primary">Pagar Ahora</button>
                     </a>
                 </div>

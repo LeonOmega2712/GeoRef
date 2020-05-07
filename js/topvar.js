@@ -25,7 +25,7 @@ document.getElementById("topvar").innerHTML =
     '<a class="dropbtn">Firebase</a>'+
     '<div class="dropdown-content">'+
         '<a href="Firebase/practica1_Firebase.html">Primera práctica</a>'+
-        '<a href="autorizacion/index.html">Autorización</a>'+
+        '<a href="autorización/index.html">Autorización</a>'+
     '</div>'+
 '</li>'+
 
