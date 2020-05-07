@@ -23,8 +23,12 @@
 
     <script>
 
-        var styleMapType = new google.maps.StyledMapType([
-        {
+        function iniciaMapa(){
+
+
+            var styledMapType = new google.maps.StyledMapType(
+                [
+                    {
                         "elementType": "geometry",
                         "stylers": [
                         {
@@ -264,28 +268,33 @@
                         }
                         ]
                     }
-        ], {name : 'Mapa oscuro'});
-
-
-        function iniciaMapa() {
+                    ],
+                        {name: 'Mapa Oscuro'}
+            );
 
             var propiedades = {
-                center: {
-                    lat: 21.152639, lng: -101.711598
+                center: { 
+                     lat: 21.152639, lng:  -101.711598
                 },
-            zoom: 14,
-            mapTypeControlOptions: [ 'roadmap','satellite','hybrid','terrain', 'style_map']
-        };
+                zoom: 14,
+                mapTypeControlOptions: {
+                    mapTypeIds : [ 'roadmap', 'satellite', 'hybrid', 'terrain', 'style_map']
+                }
+                
+            };
 
-        var mapa = document.getElementById("map");
+            var mapa = document.getElementById("map");
 
-        var map = new google.maps.Map(mapa, propiedades);
+            var map = new google.maps.Map(mapa, propiedades);
 
-        map.mapTypes.set('style_map', styleMapType);
-        map.setMapTypeId('style_map');
+            map.mapTypes.set('style_map', styledMapType);
+            map.setMapTypeId('style_map');
 
 
-    }
+
+        }
+
+
     </script>
 
 
