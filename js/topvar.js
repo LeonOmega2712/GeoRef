@@ -18,6 +18,7 @@ document.getElementById("topvar").innerHTML =
         '<a href="practica6.html">Sexta práctica</a>'+
         '<a href="practica7.html">Séptima práctica</a>'+
         '<a href="practica8.html">Octava práctica</a>'+
+        '<a href="practica9.html">Novena práctica</a>'+
     '</div>'+
 '</li>'+
 '<li class="dropdown">'+
