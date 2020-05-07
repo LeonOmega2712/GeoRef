@@ -23,18 +23,29 @@
 
     <script>
 
+        var styleMapType = new google.maps.StyledMapType([
+            {elementType : 'gemoetry', stylers:[ { color : '#242f3e'} ]}
+        ], {name : 'Mapa oscuro'});
+
+
         function iniciaMapa() {
 
             var propiedades = {
                 center: {
                     lat: 21.152639, lng: -101.711598
                 },
-            zoom: 14
+            zoom: 14,
+            mapTypeControlOptions: [ 'roadmap','satellite','hybrid','terrain', 'style_map']
         };
 
         var mapa = document.getElementById("map");
 
         var map = new google.maps.Map(mapa, propiedades);
+
+        map.mapTypes.set('style_map', styleMapType);
+        map.setMapTypeId('style_map');
+
+
     }
     </script>
 
