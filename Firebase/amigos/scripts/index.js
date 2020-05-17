@@ -30,12 +30,17 @@ const configurarMenu = (user) => {
 
 const obtieneAmigos = (data) => {
 
+    console.log('todos los usuarios:')
+    console.log(data);
+
     var map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: 21.152639, lng: -101.711598 },
         zoom: 14,
     });
 
     data.forEach(doc => {
+        console.log('usuario por usuario:')
+        console.log(doc);
         informacion = new google.maps.InfoWindow;
 
         var pos = {
