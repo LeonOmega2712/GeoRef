@@ -14,6 +14,7 @@ const configurarMenu = (user) => {
                 <p>Correo: ${ user.email}</p>
                 <p>Teléfono: ${ doc.data().telefono }</p>
                 <p>Dirección: ${ doc.data().direccion }</p>
+                <p>Coordenadas: ${ doc.data().coordenadas.latitude } , ${ doc.data().coordenadas.longitude }</p>
             `;
             datosdelacuenta.innerHTML = html;
 
