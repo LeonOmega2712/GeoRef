@@ -1,27 +1,32 @@
-auth.onAuthStateChanged( user => {
+auth.onAuthStateChanged(user => {
     if (user) {
 
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition( position  => {
+            navigator.geolocation.getCurrentPosition(position => {
                 var pos = {
-                    lat : position.coords.latitude,
-                    lng : position.coords.longitude
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
                 };
 
                 db.collection('usuarios').doc(user.uid).update({
-                    coordenadas : pos
+                    coordenadas: pos
                 });
             });
         }
 
 
-        db.collection('platillos').onSnapshot( snapshot => {
-            obtienePlatillos(snapshot.docs);
-        }) ;
-        configurarMenu(user);
+        db.collection('usuarios').onSnapshot(snapshot => {
+            obtieneAmigos(snapshot.docs);
+            configurarMenu(user);
+        }, err => {
+            console.log(err);
+        });
+
+
+
 
     } else {
-        obtienePlatillos([]);
+        obtieneAmigos([]);
         configurarMenu();
     }
 });
@@ -61,7 +66,7 @@ function mensajeError(codigo) {
             mensaje = 'Constraseña débil';
             break;
         default:
-            mensaje='Ocurrió un error con este usuario';
+            mensaje = 'Ocurrió un error con este usuario';
 
     }
     return mensaje;
@@ -80,13 +85,13 @@ salir.addEventListener('click', (e) => {
 
 const formaregistrarte = document.getElementById('formaregistrar');
 
-formaregistrarte.addEventListener('submit', (e)=> {
+formaregistrarte.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const correo = formaregistrarte['rcorreo'].value;
     const contrasena = formaregistrarte['rcontrasena'].value;
 
-    auth.createUserWithEmailAndPassword(correo, contrasena).then( cred => {
+    auth.createUserWithEmailAndPassword(correo, contrasena).then(cred => {
         return db.collection('usuarios').doc(cred.user.uid).set({
             nombre: formaregistrarte['rnombre'].value,
             telefono: formaregistrarte['rtelefono'].value,
@@ -94,41 +99,41 @@ formaregistrarte.addEventListener('submit', (e)=> {
         });
 
 
-    }).then( () => {
+    }).then(() => {
         $('#registrarmodal').modal('hide');
         formaregistrarte.reset();
         formaregistrarte.querySelector('.error').innerHTML = '';
-    }).catch ( err => {
+    }).catch(err => {
         formaregistrarte.querySelector('.error').innerHTML = mensajeError(err.code);
     });
 });
 
 entrarGoogle = () => {
- 
+
     var provider = new firebase.auth.GoogleAuthProvider();
 
-    firebase.auth().signInWithPopup(provider).then(function(result) {
+    firebase.auth().signInWithPopup(provider).then(function (result) {
 
         var token = result.credential.accessToken;
         console.log(token);
 
         var user = result.user;
 
-            console.log(user);
-            const html = `
-                <p>Nombre: ${ user.displayName }</p>
+        console.log(user);
+        const html = `
+                <p>Nombre: ${ user.displayName}</p>
                 <p>Correo: ${ user.email}</p>
-                <img src="${ user.photoURL }" width="50px">
+                <img src="${ user.photoURL}" width="50px">
             `;
-            datosdelacuenta.innerHTML = html;
+        datosdelacuenta.innerHTML = html;
 
-            $('#ingresarmodal').modal('hide');
-            formaingresar.reset();
-            formaingresar.querySelector('.error').innerHTML = '';
+        $('#ingresarmodal').modal('hide');
+        formaingresar.reset();
+        formaingresar.querySelector('.error').innerHTML = '';
 
 
         // ...
-        }).catch(function(error) {
-            console.log(error);
+    }).catch(function (error) {
+        console.log(error);
     });
 }
