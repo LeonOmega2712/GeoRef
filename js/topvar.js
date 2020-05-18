@@ -19,6 +19,7 @@ document.getElementById("topvar").innerHTML =
         '<a href="practica7.html">Séptima práctica</a>'+
         '<a href="practica8.html">Octava práctica</a>'+
         '<a href="practica9.html">Novena práctica</a>'+
+        '<a href="practica10.html">Décima práctica</a>'+
     '</div>'+
 '</li>'+
 '<li class="dropdown">'+
@@ -26,6 +27,7 @@ document.getElementById("topvar").innerHTML =
     '<div class="dropdown-content">'+
         '<a href="Firebase/practica1_Firebase.html">Primera práctica</a>'+
         '<a href="autorización/index.html">Autorización</a>'+
+        '<a href="Firebase/amigos/index.html">Amigos</a>'+
     '</div>'+
 '</li>'+
 
